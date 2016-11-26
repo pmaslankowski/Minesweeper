@@ -15,18 +15,41 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+  position: relative;
 
-	margin: auto;
-	border: 5px solid green;
-	width: 840px;
-	height: 840px;
+  margin: auto;
+  border: 5px solid green;
+  width: 840px;
+  height: 840px;
 }
 
 #gameScreen {
 	border: 1px solid black;
 	width: 640px;
 	height: 640px;
-    background: gray;
+  background: gray;
+}
+
+#timeLeft {
+  position: absolute;
+  top: 30px;
+  left: 150px;
+  width: 100px;
+  height: 50px;
+  border: 1px solid black;
+  font-size: 45px;
+  text-align: center;
+}
+
+#minesLeft {
+  position: absolute;
+  top: 30px;
+  left: 590px;
+  width: 100px;
+  height: 50px;
+  border: 1px solid black;
+  font-size: 45px;
+  text-align: center;
 }
 
 table, tr, td {
@@ -44,13 +67,70 @@ table, tr, td {
 	height: 40px;
 }
 
+/*Possible tile states: */
 .covered {
-    background: url("img/coveredTile.png");
+    background: url("img/covered.png");
     background-size: cover;
 }
 
-.empty {
-    background: url("img/emptyTile.png");
+.uncovered {
+    background: url("img/empty.png");
     background-size: cover;
 }
 
+
+.vbomb {
+  background: url("img/bomb.png");
+  background-size: cover;  
+}
+
+
+.v1 {
+  background: url("img/1.png");
+  background-size: cover;  
+}
+
+.v2 {
+  background: url("img/2.png");
+  background-size: cover;  
+}
+
+.v3 {
+  background: url("img/3.png");
+  background-size: cover;  
+}
+
+.v4 {
+  background: url("img/4.png");
+  background-size: cover;  
+}
+
+.v5 {
+  background: url("img/5.png");
+  background-size: cover;  
+}
+
+.v6 {
+  background: url("img/6.png");
+  background-size: cover;  
+}
+
+.v7 {
+  background: url("img/7.png");
+  background-size: cover;  
+}
+
+.v8 {
+  background: url("img/8.png");
+  background-size: cover;  
+}
+
+.flaged {
+  background: url("img/flag.png");
+  background-size: cover;
+}
+
+.boom {
+  background: url("img/boom.png");
+  background-size: cover;
+}
