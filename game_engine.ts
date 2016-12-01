@@ -11,7 +11,7 @@
 /// <reference path="jquery.d.ts"/>
 const BOARD_WIDTH = 16;
 const BOARD_HEIGHT = 16;
-const BOMBS_COUNT = 40;
+const BOMBS_COUNT = 10;
 const START_TIME = 300;
 
 
@@ -146,7 +146,6 @@ class Board {
       visited[i][j] = true;
       let curr = this.tiles[i][j];
       curr.setState('uncovered');
-
       /* add neighbors: we don't have to check if on the tile is a bomb,
          because if there was one, algorithm wouldn't step here */ 
       if(curr.value == '0') {
@@ -182,6 +181,16 @@ class Board {
     //this.hide();
   }
 
+  public checkWin() { //temporary solution
+    let tilesLeft = BOARD_WIDTH * BOARD_HEIGHT;
+    for(let i = 0; i < BOARD_HEIGHT; i++)
+      for(let j = 0; j < BOARD_WIDTH; j++)
+        if(this.tiles[i][j].state == 'uncovered')
+          tilesLeft--;
+        
+    if (tilesLeft == BOMBS_COUNT)
+      alert("Wygrałeś :)");
+  }
 
   public updateTime() : void {
     $('#timeLeft').html(this.timeLeft.toString());
@@ -247,8 +256,10 @@ class Tile {
             break;
           }
 
-          if(this.state != 'flaged' && this.state != 'uncovered')
+          if(this.state != 'flaged' && this.state != 'uncovered') {
             board.discover(this.i, this.j);
+            board.checkWin();
+          }
           break;
 
         case 2: //right button

@@ -9,7 +9,7 @@
 /// <reference path="jquery.d.ts"/>
 const BOARD_WIDTH = 16;
 const BOARD_HEIGHT = 16;
-const BOMBS_COUNT = 40;
+const BOMBS_COUNT = 10;
 const START_TIME = 300;
 //main game class
 class Game {
@@ -143,6 +143,16 @@ class Board {
         alert("Przegrałeś!");
         //this.hide();
     }
+    checkWin() {
+        let tilesLeft = BOARD_WIDTH * BOARD_HEIGHT;
+        for (let i = 0; i < BOARD_HEIGHT; i++)
+            for (let j = 0; j < BOARD_WIDTH; j++)
+                if (this.tiles[i][j].state == 'uncovered')
+                    tilesLeft--;
+        console.log(tilesLeft);
+        if (tilesLeft == BOMBS_COUNT)
+            alert("Wygrałeś :)");
+    }
     updateTime() {
         $('#timeLeft').html(this.timeLeft.toString());
         if (this.timeLeft > 0) {
@@ -186,8 +196,10 @@ class Tile {
                         this.board.lose(this.i, this.j);
                         break;
                     }
-                    if (this.state != 'flaged' && this.state != 'uncovered')
+                    if (this.state != 'flaged' && this.state != 'uncovered') {
                         board.discover(this.i, this.j);
+                        board.checkWin();
+                    }
                     break;
                 case 2:
                     if (this.state == 'uncovered')
